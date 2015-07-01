@@ -92,11 +92,30 @@ student = Student.get_by_id(sid)
 
 ### Querying from the Datastore
 
+To access all of the students that we may have stored we would make a `query()` on the `Student` model, and then fetch it. Like so:
 
+```python
+student_query = Student.query()
+student_data = student_query.fetch()
+```
 
+This is like forming the question "Do you have any Students?" with `.query()` and then asking the question and getting a response with `fetch()`
+
+#### `get()` vs `fetch()`
+
+There is another method similiar to `fetch()` that also retrieves data from the datastore which is `get()`.  The difference being `fetch()` can get multiple records while `get()` retrieves a single one.
+
+### Deleting a record
+
+Once you have an object (in this case `student`) you can use the key to delete it from the database:
+
+```python
+student.key.delete()
+```
 
 ## Conclusion / So What?
 
+Databases allow developers to store information in between user sessions. This opens up a world of possibility and allows for amazing and complex interactions with software. Websites and Apps can now remember things about their users.
 
 ## Hints and Hurdles
 
