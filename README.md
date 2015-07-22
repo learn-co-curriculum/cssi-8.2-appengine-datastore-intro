@@ -77,45 +77,38 @@ To retrieve an entity with a key we use the `get()` method. (put...get... get it
 self.response.write(key.get().name)
 ```
 
-### Using the key ID
+### Using the key
 
-You can also get the id of a key and get an entity from the id using the methods `id()` and `get_by_id(ID)` like so:
+You can build a Key object from a type and id using the Key constructor:
 
 ```python
-# Get id and navigate to that url
-self.redirect('/view_student?sid=%s' % key.id())
+key = ndb.Key('Student', id)
+```
+
+Now we can get that student from the database. We could also do this using the get_by_id(ID) function like so:
+
+```python
+student = Student.get_by_id(id)
+```
+
+If we need to use a key in a url, we can use the urlsafe() function:
+
+```python
+# Get urlsafe key and navigate to that url
+self.redirect('/view_student?key=%s' % key.urlsafe())
 
 # Get an entity from an ID
-sid = int(self.request.get("sid"))
-student = Student.get_by_id(sid)
+key = ndb.Key(urlsafe=self.request.get('key'))
+student = key.get()
 ```
 
 ### Querying from the Datastore
 
-To access all of the students that we may have stored we would make a `query()` on the `Student` model, and then fetch it. Like so:
 
-```python
-student_query = Student.query()
-student_data = student_query.fetch()
-```
 
-This is like forming the question "Do you have any Students?" with `.query()` and then asking the question and getting a response with `fetch()`
-
-#### `get()` vs `fetch()`
-
-There is another method similiar to `fetch()` that also retrieves data from the datastore which is `get()`.  The difference being `fetch()` can get multiple records while `get()` retrieves a single one.
-
-### Deleting a record
-
-Once you have an object (in this case `student`) you can use the key to delete it from the database:
-
-```python
-student.key.delete()
-```
 
 ## Conclusion / So What?
 
-Databases allow developers to store information in between user sessions. This opens up a world of possibility and allows for amazing and complex interactions with software. Websites and Apps can now remember things about their users.
 
 ## Hints and Hurdles
 
