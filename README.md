@@ -77,17 +77,32 @@ To retrieve an entity with a key we use the `get()` method. (put...get... get it
 self.response.write(key.get().name)
 ```
 
-### Using the key ID
+### Using the key
+
+You can build a key from a type and id using the Key object constructor:
+
+```python
+key = ndb.Key('Student', id)
+```
+
+Now we can get that student from the database.
 
 You can also get the id of a key and get an entity from the id using the methods `id()` and `get_by_id(ID)` like so:
 
 ```python
+id = key.id()
+student = Student.get_by_id(id)
+```
+
+We can also use a key in a url using the urlsafe() function:
+
+```python
 # Get id and navigate to that url
-self.redirect('/view_student?sid=%s' % key.id())
+self.redirect('/view_student?key=%s' % key.urlsafe())
 
 # Get an entity from an ID
-sid = int(self.request.get("sid"))
-student = Student.get_by_id(sid)
+key = ndb.Key(urlsafe=self.request.get("key"))
+student = key.get()
 ```
 
 ### Querying from the Datastore
