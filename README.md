@@ -1,8 +1,4 @@
----
-tags: datastore, database, python, appengine, crud
-level: 3
-languages: python, appengine
----
+
 
 # App Engine Datastore Intro
 
