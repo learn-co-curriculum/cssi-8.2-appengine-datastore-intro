@@ -131,3 +131,5 @@ Databases allow developers to store information in between user sessions. This o
 ## Hints and Hurdles
 
 + Make sure you call `put()` when writing to the database or your *entity* won't get saved.
+
+<a href='https://learn.co/lessons/cssi-8.2-appengine-datastore-intro' data-visibility='hidden'>View this lesson on Learn.co</a>
